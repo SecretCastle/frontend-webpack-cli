@@ -2,23 +2,18 @@
 const webpack = require('webpack');
 const baseConfig = require('./webpack.base');
 const merge = require('webpack-merge');
+const Config = require('../config');
 const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-module.exports = merge(baseConfig, {
+const webpackConfig = merge(baseConfig, {
 	mode: 'production',
 	entry: {
 		main: './src/index.js'
 	},
-	// devtool: 'source-map',
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production')
-		}),
-		// sourcemap
-		// new webpack.SourceMapDevToolPlugin({
-		// 	filename: 'sourcemap/[file].map'
-		// }),
-		new WebpackBundleAnalyzer(),
+		}),		
 		// 该插件会根据模块的相对路径生成一个四位数的hash作为模块id, 保证vendor的hash不会变
 		new webpack.HashedModuleIdsPlugin({
 			hashFunction: 'sha256',
@@ -51,3 +46,24 @@ module.exports = merge(baseConfig, {
 		}
 	}
 });
+
+// 如果开启了bundle分析
+if (Config.build.bundleAnalyze) {
+	webpackConfig.plugins.push(
+		new WebpackBundleAnalyzer({
+			analyzerMode: 'static'
+		}),
+	);
+}
+
+// 如果开启了sourceMap，建议不开启
+if (Config.build.sourceMap) {
+	// sourcemap
+	webpackConfig.plugins.push(
+		new webpack.SourceMapDevToolPlugin({
+			filename: `${Config.build.sourceMapFolder}/[file].map`
+		}),
+	);
+}
+
+module.exports = webpackConfig;

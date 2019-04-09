@@ -13,16 +13,13 @@ module.exports = {
 		publicPath: '/'
 	},
 	plugins: [
-		// webpack进度条
-		new webpack.ProgressPlugin(),
 		// htmlplugins
 		new HtmlWebpackPlugins({
 			title: 'Output',
 			minify: true
 		}),
 		new CleanWebpackPlugins({
-			cleanOnceBeforeBuildPatterns: path.join(process.cwd(), `${Config.outputFolderName}/**/*`),
-			verbose: true
+			cleanOnceBeforeBuildPatterns: path.join(process.cwd(), `${Config.outputFolderName}/**/*`)
 		}),
 		// manifest
 		new ManifestPlugin(),	

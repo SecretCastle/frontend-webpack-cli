@@ -8,7 +8,7 @@ module.exports = {
 	host: 'localhost',
 	build: {
 		publicPath: '/',
-		sourceMap: false, // 是否开启sourceMap
+		sourceMap: false, // 是否开启sourceMap, 不建议开启
 		sourceMapFolder: 'sourcemaps', // sourceMap文件夹名称，当sourceMap为true时有效
 		gzip: false, // gzip压缩
 		bundleAnalyze: false, // 代码分析
