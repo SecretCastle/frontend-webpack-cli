@@ -3,12 +3,14 @@ const express = require('express');
 const webpack = require('webpack');
 const WebpackDevMiddleware = require('webpack-dev-middleware');
 const app = express();
-const env = process.env.NODE_ENV;
+const argv = require('yargs').argv;
+const NODE_ENV = argv.env;
 
 // 加载webpack配置文件
 const config = require('./webpack.dev');
+
 // 如果环境是test，则webpack的mode为none
-if (env === 'test') {
+if (NODE_ENV === 'test') {
 	config.mode = 'none';
 }
 

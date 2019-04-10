@@ -1,4 +1,8 @@
 'use strict';
+
+/**
+ * 生产环境
+ */
 const webpack = require('webpack');
 const baseConfig = require('./webpack.base');
 const merge = require('webpack-merge');
