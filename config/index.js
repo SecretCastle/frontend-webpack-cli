@@ -13,7 +13,7 @@ module.exports = {
 	host: 'localhost',
 	// 获取入口路径
 	getEntry() {
-		return this.spa ? './src/views/index,js' : './src/views/**/*.js';
+		return this.spa ? './src/views/index.js' : './src/views/**/*.js';
 	},
 	build: {
 		assetsFolderPath: 'assets', // 静态文件存储文件夹

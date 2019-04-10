@@ -7,13 +7,14 @@ const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 const Utils = require('./utils');
 const path = require('path');
+const Config = require('../config');
 
 const devConfig = merge(baseConfig, {
 	mode: 'development',
 	// 入口文件
 	entry: Utils.getEntry(),
 	// 功能：当某块打包到一个文件时，如果一个子文件中存在错误，可以精准的定位到错误的位置
-	devtool: 'inline-source-map',
+	devtool: Config.development.sourceMap ? 'inline-source-map' : 'none',
 	devServer: {
 		contentBase: path.resolve(__dirname, 'dist')
 	},
