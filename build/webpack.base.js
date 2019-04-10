@@ -4,13 +4,14 @@ const HtmlWebpackPlugins = require('html-webpack-plugin');
 const CleanWebpackPlugins = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const Config = require('../config');
+
 module.exports = {
 	context: Config.contextPath,
 	output: {
 		filename: '[name].[hash].bundle.js',
 		chunkFilename: '[name].[hash].bundle.js',
 		path: path.resolve(__dirname, '..', Config.outputFolderName),
-		publicPath: '/'
+		publicPath: Config.NODE_ENV === 'prod' ? Config.build.publicPath : Config.development.publicPath
 	},
 	plugins: [
 		// htmlplugins

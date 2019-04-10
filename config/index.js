@@ -11,6 +11,7 @@ module.exports = {
 	spa: true,	// 是否是单页应用
 	port: 8099,
 	host: 'localhost',
+	NODE_ENV,
 	// 获取入口路径
 	getEntry() {
 		return this.spa ? './src/views/index.js' : './src/views/**/*.js';
