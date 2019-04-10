@@ -51,7 +51,7 @@ const webpackConfig = merge(baseConfig, {
 	}
 });
 
-// 如果开启了bundle分析
+// 是否开启bundle分析
 if (Config.build.bundleAnalyze) {
 	webpackConfig.plugins.push(
 		new WebpackBundleAnalyzer({
@@ -60,7 +60,7 @@ if (Config.build.bundleAnalyze) {
 	);
 }
 
-// 如果开启了sourceMap，建议不开启
+// 是否开启sourceMap，建议不开启
 if (Config.build.sourceMap) {
 	// sourcemap
 	webpackConfig.plugins.push(
