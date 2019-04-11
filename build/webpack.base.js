@@ -3,6 +3,7 @@ const CleanWebpackPlugins = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Config = require('../config');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const webpackBasicConfig = {
 	context: Config.contextPath,
@@ -21,6 +22,7 @@ const webpackBasicConfig = {
 		modules: ['./src', 'node_modules']
 	},
 	plugins: [
+		new VueLoaderPlugin(),
 		// 清除打包输出的文件夹
 		new CleanWebpackPlugins({
 			cleanOnceBeforeBuildPatterns: path.join(process.cwd(), `${Config.outputFolderName}/**/*`)
@@ -31,15 +33,15 @@ const webpackBasicConfig = {
 	module: {
 		rules: [
 			{
+				test: /\.vue$/,
+				loader: 'vue-loader'
+			},
+			{
 				test: /\.js$/,
 				exclude: /node_modules/,
 				loader: [
-					{
-						loader: 'babel-loader',
-						options: {
-
-						}
-					}
+					'babel-loader',
+					'eslint-loader'
 				]
 			},
 			// 不处理node_modules中的css, 使用node_modules
@@ -48,7 +50,7 @@ const webpackBasicConfig = {
 				loader: [
 					Config.NODE_ENV === 'prod' 
 						?  MiniCssExtractPlugin.loader 
-						: 'style-loader',
+						: 'vue-style-loader',
 					{
 						loader: 'css-loader',
 						options: {
@@ -68,7 +70,7 @@ const webpackBasicConfig = {
 				loader: [
 					Config.NODE_ENV === 'prod' || Config.NODE_ENV === 'test' 
 						?  MiniCssExtractPlugin.loader 
-						: 'style-loader',
+						: 'vue-style-loader',
 					'css-loader',
 					'postcss-loader'
 				],
@@ -96,6 +98,30 @@ const webpackBasicConfig = {
 						}
 					}
 				]
+			},
+			{
+				test: /\.less/,
+				loader: [
+					Config.NODE_ENV === 'prod' || Config.NODE_ENV === 'test' 
+						?  MiniCssExtractPlugin.loader 
+						: 'vue-style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true,
+							localIdentName: '[hash:base64:6]',
+							sourceMap: Config.enableCSSSourceMap ? true : false
+						}
+					},
+					'postcss-loader',
+					{
+						loader: 'less-loader',
+						options: {
+							sourceMap: Config.enableCSSSourceMap ? true : false
+						}
+					}
+				],
+				exclude: [path.resolve(__dirname, '..', 'node_modules')]
 			}
 		]
 	}
