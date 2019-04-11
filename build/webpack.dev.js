@@ -16,7 +16,9 @@ const devConfig = merge(baseConfig, {
 	// 功能：当某块打包到一个文件时，如果一个子文件中存在错误，可以精准的定位到错误的位置
 	devtool: Config.development.sourceMap ? 'inline-source-map' : 'none',
 	devServer: {
-		contentBase: path.resolve(__dirname, 'dist')
+		publicPath: Config.development.publicPath,
+		quiet: true,
+		stats: 'errors-only'
 	},
 	plugins: [
 		// webpack进度条

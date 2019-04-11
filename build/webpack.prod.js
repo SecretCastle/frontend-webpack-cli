@@ -8,7 +8,11 @@ const baseConfig = require('./webpack.base');
 const merge = require('webpack-merge');
 const Config = require('../config');
 const Utils = require('./utils');
+const CompressionPlugin = require('compression-webpack-plugin');
 const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const webpackConfig = merge(baseConfig, {
 	mode: 'production',
@@ -17,7 +21,11 @@ const webpackConfig = merge(baseConfig, {
 		// 设置当前环境为production
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production')
-		}),		
+		}),
+		new MiniCssExtractPlugin({
+			filename: '[name].[hash].css',
+			chunkFilename: '[id].[hash].css'
+		}),
 		// 该插件会根据模块的相对路径生成一个四位数的hash作为模块id, 保证vendor的hash不会变
 		new webpack.HashedModuleIdsPlugin({
 			hashFunction: 'sha256',
@@ -27,6 +35,10 @@ const webpackConfig = merge(baseConfig, {
 	],
 	optimization: {
 		minimize: true,
+		minimizer: [
+			new TerserJSPlugin(),
+			new OptimizeCSSAssetsPlugin()
+		],
 		splitChunks: {
 			chunks: 'all',
 			minSize: 10000, // 最小10kb的chunks
@@ -69,6 +81,26 @@ if (Config.build.sourceMap) {
 		}),
 	);
 }
+
+if (Config.build.gzipEnable) {
+	webpackConfig.plugins.push(
+		new CompressionPlugin({
+			test: new RegExp('\\.(' + Config.build.gzipExtensions.join('|') + ')$'),
+			filename: '[path].gz[query]',
+			threshold: 10240, // 10MB
+			algorithm: 'gzip'
+		})
+	);
+}
+
+if (Config.build.performanceInfo) {
+	webpackConfig.performance = {
+		maxEntrypointSize: 300000, // 入口资源超过300kb，发出警告
+		maxAssetSize: 100000, // 单个资源超过100KB，发出警告
+	};
+}
+
 // 增加htmlwebpackplugins
 const webpackProdConfig = Utils.addHtmlWebpackPlugins(webpackConfig);
+
 module.exports = webpackProdConfig;

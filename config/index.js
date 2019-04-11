@@ -9,6 +9,7 @@ module.exports = {
 	contextPath: path.join(__dirname, '../'),
 	outputFolderName: 'dist',
 	enableHotReload: NODE_ENV === 'prod' ? false : true, // 是否开启热加载
+	enableCSSSourceMap: NODE_ENV === 'prod' ? false : true,
 	spa: true,	// 是否是单页应用
 	port: 8099,
 	host: 'localhost',
@@ -29,8 +30,10 @@ module.exports = {
 			};
 		}
 	},
-	proxyUrl: '/',
+	// 是否开启代理
 	proxyEnable: false,
+	// 代理路由
+	proxyUrl: '/',
 	// 获取入口路径
 	getEntry() {
 		return this.spa ? './src/views/index.js' : './src/views/**/*.js';
@@ -42,9 +45,12 @@ module.exports = {
 		sourceMapFolder: 'sourcemaps', // sourceMap文件夹名称，当sourceMap为true时有效
 		gzip: false, // gzip压缩
 		bundleAnalyze: false, // 代码分析
+		gzipEnable: true, //是否开启gzip压缩
+		gzipExtensions: ['js', 'css'], //需要压缩的文件后缀
+		performanceInfo: true, // 是否开启性能信息
 	},
 	development: {
-		assetsFolderPath: 'assets', // 静态文件存储文件夹
+		assetsFolderPath: '', // 静态文件存储文件夹
 		publicPath: '/', // 发布路径
 		sourceMap: true // 开发模式下建议开启sourcemap，可以快速的定位错误代码位置
 	}
