@@ -7,7 +7,7 @@ class Welcome extends React.Component {
 		return (
 			<div className={styles.welcome}>
 				<img src={Logo} className={styles.logo}/>
-				<p>Welcome This Is React Template</p>
+				<p>Welcome React Template</p>
 			</div>
 		);
 	}

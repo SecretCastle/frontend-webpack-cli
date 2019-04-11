@@ -34,9 +34,8 @@ const webpackBasicConfig = {
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
 				loader: [
-					{
-						loader: 'babel-loader'
-					}
+					'babel-loader',
+					'eslint-loader'
 				]
 			},
 			// 不处理node_modules中的css, 使用node_modules
