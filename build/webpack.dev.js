@@ -27,5 +27,7 @@ const devConfig = merge(baseConfig, {
 		new webpack.NamedModulesPlugin()
 	]
 });
+// 增加htmlwebpackplugins
+const webpackDevConfig = Utils.addHtmlWebpackPlugins(devConfig);
 
-module.exports = devConfig;
+module.exports = webpackDevConfig;

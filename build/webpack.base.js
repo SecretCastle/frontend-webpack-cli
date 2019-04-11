@@ -1,11 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugins = require('html-webpack-plugin');
 const CleanWebpackPlugins = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const Config = require('../config');
 
-module.exports = {
+const webpackBasicConfig = {
 	context: Config.contextPath,
 	output: {
 		filename: '[name].[hash].bundle.js',
@@ -14,11 +13,6 @@ module.exports = {
 		publicPath: Config.NODE_ENV === 'prod' ? Config.build.publicPath : Config.development.publicPath
 	},
 	plugins: [
-		// htmlplugins
-		new HtmlWebpackPlugins({
-			title: 'Output',
-			minify: true
-		}),
 		new CleanWebpackPlugins({
 			cleanOnceBeforeBuildPatterns: path.join(process.cwd(), `${Config.outputFolderName}/**/*`)
 		}),
@@ -57,3 +51,5 @@ module.exports = {
 		]
 	}
 };
+
+module.exports = webpackBasicConfig;

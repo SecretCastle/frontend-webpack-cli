@@ -7,14 +7,14 @@ const webpack = require('webpack');
 const baseConfig = require('./webpack.base');
 const merge = require('webpack-merge');
 const Config = require('../config');
+const Utils = require('./utils');
 const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const webpackConfig = merge(baseConfig, {
 	mode: 'production',
-	entry: {
-		main: './src/index.js'
-	},
+	entry: Utils.getEntry(),
 	plugins: [
+		// 设置当前环境为production
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production')
 		}),		
@@ -69,5 +69,6 @@ if (Config.build.sourceMap) {
 		}),
 	);
 }
-
-module.exports = webpackConfig;
+// 增加htmlwebpackplugins
+const webpackProdConfig = Utils.addHtmlWebpackPlugins(webpackConfig);
+module.exports = webpackProdConfig;

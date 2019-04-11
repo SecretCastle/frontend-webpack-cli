@@ -5,13 +5,32 @@ const argv = require('yargs').argv;
 const NODE_ENV = argv.env;
 
 module.exports = {
+	title: 'webpack模版开发',
 	contextPath: path.join(__dirname, '../'),
 	outputFolderName: 'dist',
 	enableHotReload: NODE_ENV === 'prod' ? false : true, // 是否开启热加载
 	spa: true,	// 是否是单页应用
 	port: 8099,
 	host: 'localhost',
-	NODE_ENV,
+	NODE_ENV, // 环境变量
+	// htmlwebpack 动态添加公共配置
+	htmlWebpackPluginsConfig: {
+		title: 'webpack模版开发',
+		template: path.resolve(__dirname, '../src/public/index.ejs'),
+		minify: true,
+		minifyConfig() {
+			return {
+				collapseWhitespace: true,
+				removeComments: true,
+				removeRedundantAttributes: true,
+				removeScriptTypeAttributes: true,
+				removeStyleLinkTypeAttributes: true,
+				useShortDoctype: true
+			};
+		}
+	},
+	proxyUrl: '/',
+	proxyEnable: false,
 	// 获取入口路径
 	getEntry() {
 		return this.spa ? './src/views/index.js' : './src/views/**/*.js';
