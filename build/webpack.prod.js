@@ -98,7 +98,7 @@ if (Config.build.gzipEnable) {
 if (Config.build.performanceInfo) {
 	webpackConfig.performance = {
 		maxEntrypointSize: 300000, // 入口资源超过300kb，发出警告
-		maxAssetSize: 100000, // 单个资源超过100KB，发出警告
+		maxAssetSize: 150000, // 单个资源超过100KB，发出警告
 	};
 }
 
