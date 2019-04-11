@@ -45,7 +45,7 @@ module.exports = {
 		sourceMapFolder: 'sourcemaps', // sourceMap文件夹名称，当sourceMap为true时有效
 		gzip: false, // gzip压缩
 		bundleAnalyze: false, // 代码分析
-		gzipEnable: true, //是否开启gzip压缩
+		gzipEnable: false, //是否开启gzip压缩
 		gzipExtensions: ['js', 'css'], //需要压缩的文件后缀
 		performanceInfo: true, // 是否开启性能信息
 	},

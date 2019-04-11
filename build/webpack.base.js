@@ -31,14 +31,11 @@ const webpackBasicConfig = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
 				loader: [
 					{
-						loader: 'babel-loader',
-						options: {
-
-						}
+						loader: 'babel-loader'
 					}
 				]
 			},
@@ -96,6 +93,30 @@ const webpackBasicConfig = {
 						}
 					}
 				]
+			},
+			{
+				test: /\.less/,
+				loader: [
+					Config.NODE_ENV === 'prod' || Config.NODE_ENV === 'test' 
+						?  MiniCssExtractPlugin.loader 
+						: 'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true,
+							localIdentName: '[hash:base64:6]',
+							sourceMap: Config.enableCSSSourceMap ? true : false
+						}
+					},
+					'postcss-loader',
+					{
+						loader: 'less-loader',
+						options: {
+							sourceMap: Config.enableCSSSourceMap ? true : false
+						}
+					}
+				],
+				exclude: [path.resolve(__dirname, '..', 'node_modules')]
 			}
 		]
 	}
