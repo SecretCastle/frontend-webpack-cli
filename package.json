@@ -7,7 +7,7 @@
 		"test": "npx eslint --fix ./src",
 		"test:code": "npm run test",
 		"build": "node ./build/build.js --env prod",
-		"dev": "node ./build/webpack.server.js",
+		"dev": "node ./build/webpack.server.js --env dev",
 		"test:env": "node ./build/webpack.server.js --env test"
 	},
 	"repository": {

@@ -23,8 +23,10 @@ const webpackConfig = merge(baseConfig, {
 			'process.env.NODE_ENV': JSON.stringify('production')
 		}),
 		new MiniCssExtractPlugin({
-			filename: '[name].[hash].css',
-			chunkFilename: '[id].[hash].css'
+			filename: 'assets/css/[name].[hash].css',
+			chunkFilename: 'assets/css/[id].[hash].css',
+			hmr: Config.NODE_ENV === 'dev',
+			publicPath: Config.build.publicPath
 		}),
 		// 该插件会根据模块的相对路径生成一个四位数的hash作为模块id, 保证vendor的hash不会变
 		new webpack.HashedModuleIdsPlugin({

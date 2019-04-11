@@ -39,7 +39,7 @@ module.exports = {
 		return this.spa ? './src/views/index.js' : './src/views/**/*.js';
 	},
 	build: {
-		assetsFolderPath: 'assets', // 静态文件存储文件夹
+		assetsFolderPath: 'assets/', // 静态文件存储文件夹
 		publicPath: '/', // 发布路径
 		sourceMap: false, // 是否开启sourceMap, 不建议开启
 		sourceMapFolder: 'sourcemaps', // sourceMap文件夹名称，当sourceMap为true时有效

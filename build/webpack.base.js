@@ -7,8 +7,8 @@ const Config = require('../config');
 const webpackBasicConfig = {
 	context: Config.contextPath,
 	output: {
-		filename: '[name].[hash].bundle.js',
-		chunkFilename: '[name].[hash].bundle.js',
+		filename: 'js/[name].[hash].bundle.js',
+		chunkFilename: 'js/[name].[hash].bundle.js',
 		path: path.resolve(__dirname, '..', Config.outputFolderName),
 		publicPath: Config.NODE_ENV === 'prod' ? Config.build.publicPath : Config.development.publicPath
 	},
@@ -34,7 +34,12 @@ const webpackBasicConfig = {
 				test: /\.js$/,
 				exclude: /node_modules/,
 				loader: [
-					'babel-loader'
+					{
+						loader: 'babel-loader',
+						options: {
+
+						}
+					}
 				]
 			},
 			// 不处理node_modules中的css, 使用node_modules
