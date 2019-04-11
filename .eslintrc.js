@@ -8,7 +8,8 @@ module.exports = {
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
-    },
+	},
+	"parser": 'babel-eslint',
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -17,7 +18,6 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-		"react",
 		"prettier"
     ],
     "rules": {
