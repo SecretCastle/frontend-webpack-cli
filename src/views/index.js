@@ -7,8 +7,8 @@ import '../assets/style';
 const Welcome = React.lazy(() => import('@/pages/index'));
 
 ReactDOM.render(
-	<React.Suspense fallback={<div>Loading...</div>}>
-		<Welcome />
-	</React.Suspense>,
-	document.getElementById('app')
+    <React.Suspense fallback={<div>Loading...</div>}>
+        <Welcome />
+    </React.Suspense>,
+    document.getElementById('app')
 );
