@@ -4,6 +4,6 @@ import App from '@/pages/index';
 import '@/assets/style/index';
 
 new Vue({
-    el: '#app',
-    render: h => h(App)
+	el: '#app',
+	render: h => h(App)
 });
