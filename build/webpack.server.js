@@ -19,24 +19,24 @@ if (Config.NODE_ENV === 'test') {
 const compiler = webpack(config);
 app.use(require('webpack-hot-middleware')(compiler));
 app.use(WebpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath,
-    uiet: false,
+	publicPath: config.output.publicPath,
+	uiet: false,
 	stats: {
 		colors: true,
-        chunks: false
+		chunks: false
 	}
 }));
 app.use(router);
 
-        //是否开启代理
+//是否开启代理
 if (Config.proxyEnable) {
 	app.use('/', Proxy(ProxyUrl));
 }
 
-/ favicon
+// favicon
 router.get('/favicon.ico', (req, res, next) => {
             	res.end();
-                });
+});
 
 
 app.listen(Config.port, () => {

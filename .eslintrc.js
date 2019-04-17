@@ -6,14 +6,17 @@ module.exports = {
     },
     "extends": [
         "plugin:prettier/recommended",
-        "eslint:recommended"
+        // "eslint:recommended",
+        "plugin:vue/base",
+        "plugin:vue/recommended"
     ],
+    "plugins": ["vue"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
-    "parser": "babel-eslint",
     "parserOptions": {
+        "parser": "babel-eslint",
         "ecmaFeatures": {
             "jsx": true
         },

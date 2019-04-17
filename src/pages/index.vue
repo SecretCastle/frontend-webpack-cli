@@ -5,10 +5,10 @@ export default {
 	render(h) {
 		return (
 			<div class={style.welcome}>
-				<img class={style.logo} src={Logo}/>
+				<img class={style.logo} src={Logo} />
 				<p>Welcome Vue Template</p>
 			</div>
-		)
+		);
 	}
-}
+};
 </script>
