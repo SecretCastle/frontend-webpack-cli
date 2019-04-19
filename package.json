@@ -59,6 +59,7 @@
         "ora": "^3.4.0",
         "postcss-loader": "^3.0.0",
         "prettier": "1.16.4",
+        "progress-bar-webpack-plugin": "^1.12.1",
         "style-loader": "^0.23.1",
         "terser-webpack-plugin": "^1.2.3",
         "url-loader": "^1.1.2",

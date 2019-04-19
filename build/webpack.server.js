@@ -39,6 +39,4 @@ router.get('/favicon.ico', (req, res, next) => {
 });
 
 
-app.listen(Config.port, () => {
-	console.log('server run at http://localhost:3000');
-});
+app.listen(Config.port);

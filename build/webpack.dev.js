@@ -6,8 +6,9 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 const Utils = require('./utils');
-const path = require('path');
+const chalk = require('chalk');
 const Config = require('../config');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const devConfig = merge(baseConfig, {
 	mode: 'development',
@@ -22,7 +23,10 @@ const devConfig = merge(baseConfig, {
 	},
 	plugins: [
 		// webpack进度条
-		new webpack.ProgressPlugin(),
+		new ProgressBarPlugin({
+			format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+			clear: true
+		}),
 		// dev hot reload
 		new webpack.HotModuleReplacementPlugin(),
 		// 当开启 HMR 的时候使用该插件会显示模块的相对路径，建议用于开发环境。
