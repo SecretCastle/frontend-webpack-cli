@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "outDir": "../dist/",
+        "noImplicitAny": false,
+        "module": "ES2015",
+        "target": "es5",
+        "jsx": "react",
+        "allowJs": true,
+        "sourceMap": true // 开启sourcemap
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"]
+}
