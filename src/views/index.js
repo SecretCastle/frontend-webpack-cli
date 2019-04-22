@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import style from './style.css';
 import Logo from '@/assets/images/logo';
 const createSimDom = () => {
