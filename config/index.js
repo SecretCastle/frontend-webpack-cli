@@ -10,7 +10,7 @@ module.exports = {
 	outputFolderName: 'dist',
 	enableHotReload: NODE_ENV === 'prod' ? false : true, // 是否开启热加载
 	enableCSSSourceMap: NODE_ENV === 'prod' ? false : true, // 是否开启css sourecmap
-	spa: true,	// 是否是单页应用
+	spa: true, // 是否是单页应用
 	port: 8099,
 	host: 'localhost',
 	NODE_ENV, // 环境变量

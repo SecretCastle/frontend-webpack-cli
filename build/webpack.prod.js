@@ -37,10 +37,7 @@ const webpackConfig = merge(baseConfig, {
 	],
 	optimization: {
 		minimize: true,
-		minimizer: [
-			new TerserJSPlugin(),
-			new OptimizeCSSAssetsPlugin()
-		],
+		minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin()],
 		splitChunks: {
 			chunks: 'all',
 			minSize: 10000, // 最小10kb的chunks
@@ -70,7 +67,7 @@ if (Config.build.bundleAnalyze) {
 	webpackConfig.plugins.push(
 		new WebpackBundleAnalyzer({
 			analyzerMode: 'static'
-		}),
+		})
 	);
 }
 
@@ -98,7 +95,7 @@ if (Config.build.gzipEnable) {
 if (Config.build.performanceInfo) {
 	webpackConfig.performance = {
 		maxEntrypointSize: 300000, // 入口资源超过300kb，发出警告
-		maxAssetSize: 150000, // 单个资源超过150KB，发出警告
+		maxAssetSize: 150000 // 单个资源超过150KB，发出警告
 	};
 }
 

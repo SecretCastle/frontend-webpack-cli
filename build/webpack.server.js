@@ -18,14 +18,16 @@ if (Config.NODE_ENV === 'test') {
 
 const compiler = webpack(config);
 app.use(require('webpack-hot-middleware')(compiler));
-app.use(WebpackDevMiddleware(compiler, {
-	publicPath: config.output.publicPath,
-	uiet: false,
-	stats: {
-		colors: true,
-		chunks: false
-	}
-}));
+app.use(
+	WebpackDevMiddleware(compiler, {
+		publicPath: config.output.publicPath,
+		uiet: false,
+		stats: {
+			colors: true,
+			chunks: false
+		}
+	})
+);
 app.use(router);
 
 //是否开启代理
@@ -35,8 +37,7 @@ if (Config.proxyEnable) {
 
 // favicon
 router.get('/favicon.ico', (req, res, next) => {
-    res.end();
+	res.end();
 });
-
 
 app.listen(Config.port);
