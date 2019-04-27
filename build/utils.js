@@ -1,6 +1,7 @@
 const Config = require('../config');
 const glob = require('glob');
 const HtmlWebpackPlugins = require('html-webpack-plugin');
+const path = require('path');
 
 /**
  * 获取单页面入口
@@ -87,4 +88,9 @@ module.exports.addHtmlWebpackPlugins = webpackConfig => {
         webpackConfig.plugins.push(plugin);
     });
     return webpackConfig;
+};
+
+module.exports.assetPath = _path => {
+    const assetsOutputPath = Config.NODE_ENV === 'prod' ? Config.build.assetsFolderPath : Config.build.assetsFolderPath;
+    return path.posix.join(assetsOutputPath, _path);
 };

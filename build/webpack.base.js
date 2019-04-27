@@ -3,6 +3,7 @@ const CleanWebpackPlugins = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Config = require('../config');
+const Utils = require('./utils');
 
 const webpackBasicConfig = {
     context: Config.contextPath,
@@ -72,26 +73,19 @@ const webpackBasicConfig = {
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
-                loader: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            outputPath: `${Config[Config.NODE_ENV === 'prod' ? 'build' : 'development'].assetsFolderPath}/font`
-                        }
-                    }
-                ]
+                loader: 'file-loader',
+                options: {
+                    limit: 1024,
+                    name: Utils.assetPath('font/[name].[hash:7].[ext]')
+                }
             },
             {
-                test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-                loader: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 10000, // 10kb以下文件，使用data64形式输出
-                            outputPath: `${Config[Config.NODE_ENV === 'prod' ? 'build' : 'development'].assetsFolderPath}images`
-                        }
-                    }
-                ]
+                test: /\.(png|jpg|gif|svg)$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 10000, // 10kb以下文件，使用data64形式输出
+                    name: Utils.assetPath('images/[name].[hash:7].[ext]')
+                }
             }
         ]
     }
