@@ -1,7 +1,7 @@
 const Config = require('../config');
 const glob = require('glob');
 const HtmlWebpackPlugins = require('html-webpack-plugin');
-
+const path = require('path');
 /**
  * 获取单页面入口
  */
@@ -27,27 +27,25 @@ const getMuiltyEntry = () => {
  * 获取入口函数
  */
 module.exports.getEntry = () => {
-	return Config.spa
-		? getSpaEntry()
-		: getMuiltyEntry();
+	return Config.spa ? getSpaEntry() : getMuiltyEntry();
 };
-
-
 
 /**
  * spa应用，htmlwebpack输出
  */
 const createSpaHtmlWebpackPlugins = () => {
-	return [new HtmlWebpackPlugins({
-		title: Config.htmlWebpackPluginsConfig.title,
-		template: Config.htmlWebpackPluginsConfig.template,
-		minify: Config.htmlWebpackPluginsConfig.minify ? Config.htmlWebpackPluginsConfig.minifyConfig() : false,
-		meta: {
-			chartset: 'UTF-8',
-			viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
-			'X-UA-Compatible': 'ie=edge'
-		}
-	})];
+	return [
+		new HtmlWebpackPlugins({
+			title: Config.htmlWebpackPluginsConfig.title,
+			template: Config.htmlWebpackPluginsConfig.template,
+			minify: Config.htmlWebpackPluginsConfig.minify ? Config.htmlWebpackPluginsConfig.minifyConfig() : false,
+			meta: {
+				chartset: 'UTF-8',
+				viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+				'X-UA-Compatible': 'ie=edge'
+			}
+		})
+	];
 };
 
 /**
@@ -63,17 +61,19 @@ const createMuitiHtmlWebpackPlugins = () => {
 		// 截取文件路径，获取文件名
 		const fileName = file.substring(file.indexOf('views/') + 6, file.lastIndexOf('/'));
 		// 增加htmlplugins
-		plugins.push(new HtmlWebpackPlugins({
-			title: Config.htmlWebpackPluginsConfig.title + '-' + fileName,
-			filename: fileName + '.html',
-			template: Config.htmlWebpackPluginsConfig.template,
-			minify: Config.htmlWebpackPluginsConfig.minify ? Config.htmlWebpackPluginsConfig.minifyConfig() : false,
-			meta: {
-				chartset: 'UTF-8',
-				viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
-				'X-UA-Compatible': 'ie=edge'
-			}
-		}));
+		plugins.push(
+			new HtmlWebpackPlugins({
+				title: Config.htmlWebpackPluginsConfig.title + '-' + fileName,
+				filename: fileName + '.html',
+				template: Config.htmlWebpackPluginsConfig.template,
+				minify: Config.htmlWebpackPluginsConfig.minify ? Config.htmlWebpackPluginsConfig.minifyConfig() : false,
+				meta: {
+					chartset: 'UTF-8',
+					viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+					'X-UA-Compatible': 'ie=edge'
+				}
+			})
+		);
 	}
 	return plugins;
 };
@@ -87,4 +87,9 @@ module.exports.addHtmlWebpackPlugins = webpackConfig => {
 		webpackConfig.plugins.push(plugin);
 	});
 	return webpackConfig;
+};
+
+module.exports.assetPath = _path => {
+	const assetsOutputPath = Config.NODE_ENV === 'prod' ? Config.build.assetsFolderPath : Config.build.assetsFolderPath;
+	return path.posix.join(assetsOutputPath, _path);
 };
