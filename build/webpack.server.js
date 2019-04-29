@@ -17,7 +17,6 @@ if (Config.NODE_ENV === 'test') {
 }
 
 const compiler = webpack(config);
-app.use(require('webpack-hot-middleware')(compiler));
 app.use(WebpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
     quiet: false,
@@ -26,6 +25,7 @@ app.use(WebpackDevMiddleware(compiler, {
         chunks: false
     }
 }));
+app.use(require('webpack-hot-middleware')(compiler));
 app.use(router);
 
 // 是否开启代理
