@@ -13,3 +13,8 @@ ReactDOM.render(
     </React.Suspense>,
     document.getElementById('app')
 );
+
+// 热加载
+if (module.hot) {
+    module.hot.accept();
+}
