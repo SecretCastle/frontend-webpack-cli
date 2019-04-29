@@ -85,7 +85,7 @@ const webpackBasicConfig = {
             },
             {
                 test: /\.less/,
-                ader: [
+                loader: [
                     Config.NODE_ENV === 'prod' || Config.NODE_ENV === 'test'
                         ? MiniCssExtractPlugin.loader
                         : 'style-loader',
