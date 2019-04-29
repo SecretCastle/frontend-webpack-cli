@@ -17,17 +17,17 @@ if (Config.NODE_ENV === 'test') {
 }
 
 const compiler = webpack(config);
-app.use(require('webpack-hot-middleware')(compiler));
 app.use(
-	WebpackDevMiddleware(compiler, {
-		publicPath: config.output.publicPath,
+        packDevMiddleware(compiler, {
+    Path: config.output.publicPath,
 		uiet: false,
-		stats: {
+ats: {
 			colors: true,
 			chunks: false
 		}
 	})
 );
+app.use(require('webpack-hot-middleware')(compiler));
 app.use(router);
 
 //是否开启代理
