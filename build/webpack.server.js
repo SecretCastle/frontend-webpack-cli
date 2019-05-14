@@ -17,16 +17,14 @@ if (Config.NODE_ENV === 'test') {
 }
 
 const compiler = webpack(config);
-app.use(
-    webpackDevMiddleware(compiler, {
-        publicPath: config.output.publicPath,
-        quiet: false,
-        stats: {
-            colors: true,
-            chunks: false
-        }
-    })
-);
+app.use(WebpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    quiet: false,
+    stats: {
+        colors: true,
+        chunks: false
+    }
+}));
 app.use(require('webpack-hot-middleware')(compiler));
 app.use(router);
 
