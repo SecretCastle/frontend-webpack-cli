@@ -13,31 +13,31 @@ const config = require('./webpack.dev');
 
 // 如果环境是test，则webpack的mode为none
 if (Config.NODE_ENV === 'test') {
-	config.mode = 'none';
+    config.mode = 'none';
 }
 
 const compiler = webpack(config);
 app.use(
-        packDevMiddleware(compiler, {
-    Path: config.output.publicPath,
-		uiet: false,
-ats: {
-			colors: true,
-			chunks: false
-		}
-	})
+    webpackDevMiddleware(compiler, {
+        publicPath: config.output.publicPath,
+        quiet: false,
+        stats: {
+            colors: true,
+            chunks: false
+        }
+    })
 );
 app.use(require('webpack-hot-middleware')(compiler));
 app.use(router);
 
 //是否开启代理
 if (Config.proxyEnable) {
-	app.use('/', Proxy(ProxyUrl));
+    app.use('/', Proxy(ProxyUrl));
 }
 
 // favicon
 router.get('/favicon.ico', (req, res, next) => {
-	res.end();
+    res.end();
 });
 
 app.listen(Config.port);
