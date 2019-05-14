@@ -38,6 +38,7 @@ module.exports = {
     getEntry() {
         return this.spa ? './src/views/index.js' : './src/views/**/*.js';
     },
+    cssModule: false, //是否开启css module
     build: {
         assetsFolderPath: 'assets/', // 静态文件存储文件夹
         publicPath: '/', // 发布路径

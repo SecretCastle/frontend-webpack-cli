@@ -49,7 +49,7 @@ const webpackBasicConfig = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true,
+                            modules: Config.cssModule,
                             localIdentName: '[hash:base64:6]',
                             sourceMap: Config.enableCSSSourceMap ? true : false
                         }
