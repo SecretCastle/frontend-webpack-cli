@@ -36,9 +36,9 @@ module.exports = {
     proxyUrl: '/',
     // 获取入口路径
     getEntry() {
-        return this.spa ? './src/views/index.js' : './src/views/**/*.js';
+        return this.spa ? './src/index.js' : './src/**/*.js';
     },
-    cssModule: false, //是否开启css module
+    cssModule: true, //是否开启css module
     build: {
         assetsFolderPath: 'assets/', // 静态文件存储文件夹
         publicPath: '/', // 发布路径
