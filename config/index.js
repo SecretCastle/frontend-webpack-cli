@@ -36,7 +36,7 @@ module.exports = {
     proxyUrl: '/',
     // 获取入口路径
     getEntry() {
-        return this.spa ? './src/index.js' : './src/**/*.js';
+        return this.spa ? './src/index.tsx' : './src/**/*.tsx';
     },
     cssModule: true, //是否开启css module
     build: {

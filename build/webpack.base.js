@@ -18,7 +18,7 @@ const webpackBasicConfig = {
         alias: {
             '@': path.resolve(__dirname, '../src')
         },
-        extensions: ['.js', '.jsx', '.vue', '.css', '.less', '.json', '.ejs', '.png', '.jpg', '.jpeg', '.gif'],
+        extensions: ['.js', '.jsx', '.vue', '.css', '.less', '.json', '.ejs', '.png', '.jpg', '.jpeg', '.gif', '.ts', '.tsx'],
         modules: ['./src', 'node_modules']
     },
     plugins: [
@@ -31,6 +31,11 @@ const webpackBasicConfig = {
     ],
     module: {
         rules: [
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                loader: 'awesome-typescript-loader'
+            },
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
