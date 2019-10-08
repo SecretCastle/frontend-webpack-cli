@@ -8,7 +8,12 @@
         "noUnusedLocals": true,
         "noImplicitAny": true,
         "target": "es6",
-        "lib": ["dom", "es2017"]
+        "lib": ["dom", "es2017"],
+        "typeRoots": ["typings"],
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["./src/*"]
+        }
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules", "dist", "build"]
