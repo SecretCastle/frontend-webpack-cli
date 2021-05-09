@@ -86,7 +86,7 @@
         "not ie <= 8"
     ],
     "dependencies": {
-        "lodash": "^4.17.11"
+        "lodash": "^4.17.21"
     },
     "sideEffects": false
 }
